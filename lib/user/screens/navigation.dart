@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/user/screens/home_screen.dart';
+import 'package:flutter_application_1/user/screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,7 +48,7 @@ class _NavigationState extends State<Navigation> {
       appBar: AppBar(
         title: const Text('Welcome'),
         backgroundColor:
-            const Color.fromARGB(206, 186, 112, 26), // Custom hex color
+            const Color.fromARGB(206, 232, 176, 112), // Custom hex color
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -106,7 +107,11 @@ class _NavigationState extends State<Navigation> {
               leading: const Icon(Icons.exit_to_app, color: Colors.black),
               title: const Text('Logout'),
               onTap: () {
-                Navigator.pop(context); // Close the drawer
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            LoginScreen())); // Close the drawer
                 // Add logout logic here
               },
             ),

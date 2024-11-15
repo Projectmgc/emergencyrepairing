@@ -5,9 +5,5 @@ import 'package:flutter_application_1/user/screens/navigation.dart';
 import 'package:flutter_application_1/user/screens/register.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Navigation()
-    )
-  );
+  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Navigation()));
 }

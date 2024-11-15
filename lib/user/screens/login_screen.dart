@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/user/screens/home_screen.dart';
+import 'package:flutter_application_1/user/screens/navigation.dart';
 import 'package:flutter_application_1/user/screens/register.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -101,9 +103,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextButton(
                         onPressed: () {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Register()),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Register()));
                         },
                         child: Text('Create an account'),
                       ),
@@ -111,7 +113,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 20.0),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Navigation()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       elevation: 8.0,
                       shadowColor: const Color.fromARGB(255, 16, 9, 112),
