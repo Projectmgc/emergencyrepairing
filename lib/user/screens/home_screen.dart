@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/user/screens/fuel.dart';
+import 'package:flutter_application_1/user/screens/login_screen.dart';
+import 'package:flutter_application_1/user/screens/repair.dart';
+import 'package:flutter_application_1/user/screens/tow.dart';
 
 class HomeScreen extends StatelessWidget {
-  // Define a GlobalKey to manage the Scaffold state
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey, // Assign the key to the Scaffold
       body: Center(
         child: Stack(
           children: [
@@ -16,7 +16,10 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment(-0.7, -0.4),
               child: GestureDetector(
                 onTap: () {
-                  // Add navigation or other actions here
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FuelStationApp()),
+                  );
                 },
                 child: Container(
                   width: 180,
@@ -27,13 +30,12 @@ class HomeScreen extends StatelessWidget {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    borderRadius:
-                        BorderRadius.circular(25), // Increased corner radius
+                    borderRadius: BorderRadius.circular(25),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.3),
                         blurRadius: 20,
-                        offset: Offset(6, 8), // Adjusted shadow for depth
+                        offset: Offset(6, 8),
                       ),
                     ],
                   ),
@@ -42,15 +44,15 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.local_gas_station, // Icon for Fuel
+                          Icons.local_gas_station,
                           color: Colors.white,
-                          size: 35, // Slightly larger icon
+                          size: 35,
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         Text(
                           'Fuel',
                           style: TextStyle(
-                            fontSize: 20, // Increased font size
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             shadows: [
@@ -73,7 +75,11 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment(0.7, -0.4),
               child: GestureDetector(
                 onTap: () {
-                  // Add navigation or other actions here
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => VehicleRepairApp()),
+                  );
+                  // Add navigation or actions for Repair Services
                 },
                 child: Container(
                   width: 180,
@@ -84,13 +90,12 @@ class HomeScreen extends StatelessWidget {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    borderRadius:
-                        BorderRadius.circular(25), // Increased corner radius
+                    borderRadius: BorderRadius.circular(25),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.3),
                         blurRadius: 20,
-                        offset: Offset(6, 8), // Adjusted shadow for depth
+                        offset: Offset(6, 8),
                       ),
                     ],
                   ),
@@ -101,13 +106,13 @@ class HomeScreen extends StatelessWidget {
                         Icon(
                           Icons.build,
                           color: Colors.white,
-                          size: 35, // Slightly larger icon
+                          size: 35,
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         Text(
                           'Repair services',
                           style: TextStyle(
-                            fontSize: 20, // Increased font size
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             shadows: [
@@ -130,7 +135,11 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment(-0.7, 0.4),
               child: GestureDetector(
                 onTap: () {
-                  // Add navigation or other actions here
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TowingServiceApp()),
+                  );
+                  // Add navigation or actions for Tow Services
                 },
                 child: Container(
                   width: 180,
@@ -141,13 +150,12 @@ class HomeScreen extends StatelessWidget {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    borderRadius:
-                        BorderRadius.circular(25), // Increased corner radius
+                    borderRadius: BorderRadius.circular(25),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.3),
                         blurRadius: 20,
-                        offset: Offset(6, 8), // Adjusted shadow for depth
+                        offset: Offset(6, 8),
                       ),
                     ],
                   ),
@@ -158,13 +166,13 @@ class HomeScreen extends StatelessWidget {
                         Icon(
                           Icons.drive_eta,
                           color: Colors.white,
-                          size: 35, // Slightly larger icon
+                          size: 35,
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         Text(
                           'Tow services',
                           style: TextStyle(
-                            fontSize: 20, // Increased font size
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             shadows: [
@@ -187,7 +195,11 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment(0.7, 0.4),
               child: GestureDetector(
                 onTap: () {
-                  // Add navigation or other actions here
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                  // Add logout functionality
                 },
                 child: Container(
                   width: 180,
@@ -198,13 +210,12 @@ class HomeScreen extends StatelessWidget {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    borderRadius:
-                        BorderRadius.circular(25), // Increased corner radius
+                    borderRadius: BorderRadius.circular(25),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.3),
                         blurRadius: 20,
-                        offset: Offset(6, 8), // Adjusted shadow for depth
+                        offset: Offset(6, 8),
                       ),
                     ],
                   ),
@@ -215,13 +226,13 @@ class HomeScreen extends StatelessWidget {
                         Icon(
                           Icons.exit_to_app,
                           color: Colors.white,
-                          size: 35, // Slightly larger icon
+                          size: 35,
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         Text(
                           'Logout',
                           style: TextStyle(
-                            fontSize: 20, // Increased font size
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             shadows: [

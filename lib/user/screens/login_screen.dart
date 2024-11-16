@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/user/screens/home_screen.dart';
 import 'package:flutter_application_1/user/screens/navigation.dart';
 import 'package:flutter_application_1/user/screens/register.dart';
 
@@ -13,16 +12,18 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  // Variable to manage password visibility
+  bool isPasswordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 181, 184, 100),
           image: DecorationImage(
-            image: AssetImage('assets/your_background_image.png'),
+            image: AssetImage('asset/img2.jpeg'),
             fit: BoxFit.cover,
-            opacity: 0.2,
+            opacity: 0.85,
           ),
         ),
         child: Center(
@@ -57,10 +58,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 300,
                     child: TextFormField(
                       controller: usernameController,
+                      style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                         labelText: 'Username',
+                        labelStyle: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
                         border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.person),
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.black,
+                        ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(width: 1.0),
                         ),
@@ -78,15 +85,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 300,
                     child: TextFormField(
                       controller: passwordController,
+                      obscureText: !isPasswordVisible, // Toggle visibility
                       decoration: InputDecoration(
                         labelText: 'Password',
+                        labelStyle: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
                         border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: Icon(
+                          Icons.lock,
+                          color: Colors.black,
+                        ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(width: 1.0),
                         ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isPasswordVisible = !isPasswordVisible;
+                            });
+                          },
+                        ),
                       ),
-                      obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your password';
@@ -99,7 +124,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't have an account? "),
+                      Text(
+                        "Don't have an account? ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -107,17 +138,25 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                   builder: (context) => const Register()));
                         },
-                        child: Text('Create an account'),
+                        child: Text(
+                          'Create an account',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
                       ),
                     ],
                   ),
                   SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Navigation()),
-                      );
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Navigation()),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 8.0,
