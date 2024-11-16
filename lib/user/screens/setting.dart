@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+class Settings extends StatefulWidget {
+  const Settings({super.key});
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsPageState extends State<Settings> {
   bool _isDarkMode = false; // Initially set to light mode
   double _fontSize = 16.0; // Default font size
   final _passwordController = TextEditingController();
@@ -198,8 +198,7 @@ class _MyAppState extends State<MyApp> {
         primaryColor: const Color.fromARGB(
             206, 180, 123, 59), // Custom color for dark theme
       ),
-      home:
-          const SettingsPage(), // Directly load SettingsPage here for simplicity
+      home: const Settings(), // Directly load SettingsPage here for simplicity
     );
   }
 }
