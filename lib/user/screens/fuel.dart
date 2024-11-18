@@ -37,7 +37,7 @@ class _FuelStationListState extends State<FuelStationList> {
       }
     },
     {
-      'name': 'Nayara Fuel Point ',
+      'name': 'Nayara Fuel Station ',
       'fuels': {
         'Petrol': 104.0,
         'Diesel': 94.0,
@@ -221,7 +221,6 @@ class _FuelStationListState extends State<FuelStationList> {
                                           totalPrice > 0 ? proceedToPay : null,
                                       child: Text('Proceed to Pay'),
                                       style: ElevatedButton.styleFrom(
-
                                         padding: EdgeInsets.symmetric(
                                             vertical: 15, horizontal: 30),
                                         textStyle: TextStyle(fontSize: 16),

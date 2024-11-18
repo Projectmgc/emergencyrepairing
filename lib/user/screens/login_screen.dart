@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Create an account',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                            color: const Color.fromARGB(255, 215, 33, 5),
                           ),
                         ),
                       ),

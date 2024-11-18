@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/user/screens/about.dart';
 import 'package:flutter_application_1/user/screens/home_screen.dart';
 import 'package:flutter_application_1/user/screens/login_screen.dart';
 import 'package:flutter_application_1/user/screens/profile.dart';
+import 'package:flutter_application_1/user/screens/setting.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,9 +49,20 @@ class _NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome'),
+        title: const Text(
+          'Welcome to Fuel & Fix App',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, // Makes the title bold
+              fontSize: 24, // Custom font size
+              letterSpacing: 1.2, // Adds space between the letters
+              fontFamily: 'Roboto',
+              color: Color.fromARGB(255, 249, 239,
+                  235) // Sets a custom font family (you can choose your own)
+              ),
+        ),
         backgroundColor:
-            const Color.fromARGB(206, 180, 123, 59), // Custom hex color
+            const Color.fromARGB(255, 173, 167, 117), // Custom hex color
+        centerTitle: true, // This centers the title within the app bar
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -74,14 +87,17 @@ class _NavigationState extends State<Navigation> {
                     'assets/images/avatar.png'), // Use your image here
               ),
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: Color.fromARGB(255, 173, 167, 117),
               ),
             ),
             // Drawer Menu Items
             ListTile(
               leading: const Icon(Icons.home, color: Colors.black),
               title: const Text('Home'),
-              onTap: () => _onSelectPage(0),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Navigation()));
+              },
             ),
             ListTile(
               leading: const Icon(Icons.person, color: Colors.black),
@@ -94,7 +110,10 @@ class _NavigationState extends State<Navigation> {
             ListTile(
               leading: const Icon(Icons.settings, color: Colors.black),
               title: const Text('Settings'),
-              onTap: () => _onSelectPage(2),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Settings()));
+              },
             ),
             // Divider for separation
             const Divider(),
@@ -103,7 +122,11 @@ class _NavigationState extends State<Navigation> {
               leading: const Icon(Icons.help, color: Colors.black),
               title: const Text('About Help'),
               onTap: () {
-                Navigator.pop(context); // Close the drawer
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            AboutHelpPage())); // Close the drawer
                 // Add Help Screen or About Page here if needed
               },
             ),

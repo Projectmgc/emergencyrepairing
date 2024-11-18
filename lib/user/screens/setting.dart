@@ -108,8 +108,7 @@ class _SettingsPageState extends State<Settings> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
-        backgroundColor:
-            const Color.fromARGB(206, 180, 123, 59), // Custom hex color
+        backgroundColor: const Color.fromARGB(206, 163, 165, 38),
       ),
       body: ListView(
         children: [
