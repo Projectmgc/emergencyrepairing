@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/admin/screens/feedback.dart';
+import 'package:flutter_application_1/admin/screens/manage_fuel.dart';
+import 'package:flutter_application_1/admin/screens/manage_mecahnics.dart';
+import 'package:flutter_application_1/admin/screens/manage_users.dart';
+import 'package:flutter_application_1/admin/screens/reports.dart';
+import 'package:flutter_application_1/admin/screens/transaction.dart';
 
 class AdminPage extends StatelessWidget {
   @override
@@ -39,7 +45,7 @@ class AdminPage extends StatelessWidget {
               _adminOption('Manage Users', Icons.manage_accounts, () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ManageUsersPage()),
+                  MaterialPageRoute(builder: (context) => ManageUser()),
                 );
               }),
               SizedBox(height: 10),
@@ -49,8 +55,7 @@ class AdminPage extends StatelessWidget {
               _adminOption('Manage Mechanics', Icons.build, () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => ManageMechanicsPage()),
+                  MaterialPageRoute(builder: (context) => MechanicPage()),
                 );
               }),
               SizedBox(height: 10),
@@ -60,8 +65,7 @@ class AdminPage extends StatelessWidget {
               _adminOption('Manage Fuel Stations', Icons.local_gas_station, () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => ManageFuelStationsPage()),
+                  MaterialPageRoute(builder: (context) => ManageFuelStation()),
                 );
               }),
               SizedBox(height: 10),
@@ -71,7 +75,8 @@ class AdminPage extends StatelessWidget {
               _adminOption('View Transactions', Icons.payment, () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TransactionsPage()),
+                  MaterialPageRoute(
+                      builder: (context) => TransactionManagementPage()),
                 );
               }),
               SizedBox(height: 10),
@@ -81,7 +86,8 @@ class AdminPage extends StatelessWidget {
               _adminOption('View Reports', Icons.analytics, () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ReportsPage()),
+                  MaterialPageRoute(
+                      builder: (context) => ReportsAnalyticsPage()),
                 );
               }),
               SizedBox(height: 10),
@@ -91,7 +97,7 @@ class AdminPage extends StatelessWidget {
               _adminOption('Manage Feedback', Icons.feedback, () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FeedbackPage()),
+                  MaterialPageRoute(builder: (context) => ManageFeedbackPage()),
                 );
               }),
             ],
