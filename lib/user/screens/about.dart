@@ -96,7 +96,7 @@ class AboutHelpPage extends StatelessWidget {
                       style: TextStyle(fontSize: 16),
                     ),
                     Text(
-                      'Our support team is available 24/7 to assist you.',
+                      'Our support team is available 24x7 to assist you.',
                       style:
                           TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                     ),

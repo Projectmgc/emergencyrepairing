@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(VehicleRepairApp());
-}
-
 class VehicleRepairApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

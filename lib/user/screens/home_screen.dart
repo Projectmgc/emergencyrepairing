@@ -20,8 +20,8 @@ class HomeScreen extends StatelessWidget {
                   title: 'Fuel',
                   icon: Icons.local_gas_station,
                   colors: [
-                    Color.fromARGB(255, 218, 80, 30),
-                    Color.fromARGB(255, 162, 182, 44)
+                    Color.fromARGB(255, 177, 64, 23),
+                    Color.fromARGB(255, 212, 195, 43)
                   ],
                   onTap: () {
                     Navigator.push(
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                   title: 'Repair Services',
                   icon: Icons.build,
                   colors: [
-                    Color.fromARGB(255, 196, 106, 16),
+                    Color.fromARGB(255, 223, 52, 9),
                     Color.fromARGB(197, 8, 12, 9)
                   ],
                   onTap: () {
@@ -58,8 +58,8 @@ class HomeScreen extends StatelessWidget {
                   title: 'Tow Services',
                   icon: Icons.drive_eta,
                   colors: [
-                    Color.fromARGB(255, 32, 153, 36),
-                    Color.fromARGB(255, 119, 22, 36)
+                    Color.fromARGB(255, 54, 9, 52),
+                    Color.fromARGB(255, 133, 189, 41)
                   ],
                   onTap: () {
                     Navigator.push(

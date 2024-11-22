@@ -141,101 +141,120 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ? Column(
                           children: [
                             // Username Field (Editable with validation)
-                            TextFormField(
-                              controller: usernameController,
-                              decoration: InputDecoration(
-                                labelText: 'Username',
-                                border: OutlineInputBorder(),
-                                prefixIcon: Icon(Icons.person),
+                            Center(
+                              child: SizedBox(
+                                width: 400,
+                                child: TextFormField(
+                                  controller: usernameController,
+                                  decoration: InputDecoration(
+                                    labelText: 'Username',
+                                    border: OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.person),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter a username';
+                                    }
+                                    return null;
+                                  },
+                                ),
                               ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a username';
-                                }
-                                return null;
-                              },
                             ),
                             SizedBox(height: 20),
 
                             // Password Field (Editable with validation)
-                            TextFormField(
-                              controller: passwordController,
-                              decoration: InputDecoration(
-                                labelText: 'Password',
-                                border: OutlineInputBorder(),
-                                prefixIcon: Icon(Icons.lock),
+                            SizedBox(
+                              width: 400,
+                              child: TextFormField(
+                                controller: passwordController,
+                                decoration: InputDecoration(
+                                  labelText: 'Password',
+                                  border: OutlineInputBorder(),
+                                  prefixIcon: Icon(Icons.lock),
+                                ),
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a password';
+                                  }
+                                  return null;
+                                },
                               ),
-                              obscureText: true,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a password';
-                                }
-                                return null;
-                              },
                             ),
                             SizedBox(height: 20),
 
                             // Phone Number Field (Editable with validation)
-                            TextFormField(
-                              controller: phoneNumberController,
-                              decoration: InputDecoration(
-                                labelText: 'Phone Number',
-                                border: OutlineInputBorder(),
-                                prefixIcon: Icon(Icons.phone),
+
+                            SizedBox(
+                              width: 400,
+                              child: TextFormField(
+                                controller: phoneNumberController,
+                                decoration: InputDecoration(
+                                  labelText: 'Phone Number',
+                                  border: OutlineInputBorder(),
+                                  prefixIcon: Icon(Icons.phone),
+                                ),
+                                keyboardType: TextInputType.phone,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a phone number';
+                                  }
+                                  // Regex for phone number validation (simple 10 digit validation)
+                                  String pattern = r'^[0-9]{10}$';
+                                  RegExp regex = RegExp(pattern);
+                                  if (!regex.hasMatch(value)) {
+                                    return 'Please enter a valid 10-digit phone number';
+                                  }
+                                  return null;
+                                },
                               ),
-                              keyboardType: TextInputType.phone,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a phone number';
-                                }
-                                // Regex for phone number validation (simple 10 digit validation)
-                                String pattern = r'^[0-9]{10}$';
-                                RegExp regex = RegExp(pattern);
-                                if (!regex.hasMatch(value)) {
-                                  return 'Please enter a valid 10-digit phone number';
-                                }
-                                return null;
-                              },
                             ),
                             SizedBox(height: 20),
 
                             // Email Field (Editable with validation)
-                            TextFormField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                labelText: 'Email',
-                                border: OutlineInputBorder(),
-                                prefixIcon: Icon(Icons.email),
+
+                            SizedBox(
+                              width: 400,
+                              child: TextFormField(
+                                controller: emailController,
+                                decoration: InputDecoration(
+                                  labelText: 'Email',
+                                  border: OutlineInputBorder(),
+                                  prefixIcon: Icon(Icons.email),
+                                ),
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter an email';
+                                  }
+                                  if (!RegExp(
+                                          r'^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+')
+                                      .hasMatch(value)) {
+                                    return 'Please enter a valid email';
+                                  }
+                                  return null;
+                                },
                               ),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter an email';
-                                }
-                                if (!RegExp(
-                                        r'^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+')
-                                    .hasMatch(value)) {
-                                  return 'Please enter a valid email';
-                                }
-                                return null;
-                              },
                             ),
                             SizedBox(height: 20),
 
                             // Address Field (Editable with validation)
-                            TextFormField(
-                              controller: addressController,
-                              decoration: InputDecoration(
-                                labelText: 'Address',
-                                border: OutlineInputBorder(),
-                                prefixIcon: Icon(Icons.home),
+                            SizedBox(
+                              width: 400,
+                              child: TextFormField(
+                                controller: addressController,
+                                decoration: InputDecoration(
+                                  labelText: 'Address',
+                                  border: OutlineInputBorder(),
+                                  prefixIcon: Icon(Icons.home),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter an address';
+                                  }
+                                  return null;
+                                },
                               ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter an address';
-                                }
-                                return null;
-                              },
                             ),
                             SizedBox(height: 30),
                           ],
@@ -303,20 +322,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
 
-              // Save and Cancel Buttons (Only visible when editing)
               if (isEditing)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: _handleSave,
-                      child: Text('Save'),
-                    ),
-                    OutlinedButton(
-                      onPressed: _handleCancel,
-                      child: Text('Cancel'),
-                    ),
-                  ],
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _handleSave,
+                        child: Text('Save'),
+                      ),
+                      SizedBox(width: 20), // Space between buttons
+                      OutlinedButton(
+                        onPressed: _handleCancel,
+                        child: Text('Cancel'),
+                      ),
+                    ],
+                  ),
                 ),
               SizedBox(height: 30),
 
@@ -324,7 +345,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Center(
                 child: ElevatedButton(
                   onPressed: toggleEditingMode,
-                  child: Text(isEditing ? 'Stop Editing' : 'Edit Profile'),
+                  child: Text('Edit Profile'),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                     textStyle: TextStyle(fontSize: 18),

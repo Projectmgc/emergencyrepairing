@@ -1,23 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Vehicle Registration',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const VehicleRegistrationPage(),
-    );
-  }
-}
+import 'package:flutter_application_1/user/screens/navigation.dart';
 
 class VehicleRegistrationPage extends StatefulWidget {
   const VehicleRegistrationPage({Key? key}) : super(key: key);
@@ -36,7 +18,8 @@ class _VehicleRegistrationPageState extends State<VehicleRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[50], // Set a light background color
+      backgroundColor: const Color.fromARGB(
+          255, 167, 213, 166), // Set a light background color
       body: Center(
         // Center the form on the screen
         child: SingleChildScrollView(
@@ -55,7 +38,7 @@ class _VehicleRegistrationPageState extends State<VehicleRegistrationPage> {
                   const Text(
                     'Please Register Your Vehicle',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -63,54 +46,63 @@ class _VehicleRegistrationPageState extends State<VehicleRegistrationPage> {
                   const SizedBox(height: 60),
 
                   // Vehicle Type Input
-                  TextFormField(
-                    controller: _vehicleTypeController,
-                    decoration: const InputDecoration(
-                      labelText: 'Vehicle Type',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.directions_car), // Vehicle icon
+                  SizedBox(
+                    width: 400,
+                    child: TextFormField(
+                      controller: _vehicleTypeController,
+                      decoration: const InputDecoration(
+                        labelText: 'Vehicle Type',
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.directions_car), // Vehicle icon
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a vehicle type';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a vehicle type';
-                      }
-                      return null;
-                    },
                   ),
                   const SizedBox(height: 20),
 
-                  // Registration Number Input
-                  TextFormField(
-                    controller: _registrationController,
-                    decoration: const InputDecoration(
-                      labelText: 'Registration Number',
-                      border: OutlineInputBorder(),
-                      prefixIcon:
-                          Icon(Icons.confirmation_number), // Registration icon
+                  SizedBox(
+                    width: 400,
+                    // Registration Number Input
+                    child: TextFormField(
+                      controller: _registrationController,
+                      decoration: const InputDecoration(
+                        labelText: 'Registration Number',
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(
+                            Icons.confirmation_number), // Registration icon
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a registration number';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a registration number';
-                      }
-                      return null;
-                    },
                   ),
                   const SizedBox(height: 20),
 
                   // Location Input
-                  TextFormField(
-                    controller: _locationController,
-                    decoration: const InputDecoration(
-                      labelText: 'Location',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.location_on), // Location icon
+                  SizedBox(
+                    width: 400,
+                    child: TextFormField(
+                      controller: _locationController,
+                      decoration: const InputDecoration(
+                        labelText: 'Location',
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.location_on), // Location icon
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a location';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a location';
-                      }
-                      return null;
-                    },
                   ),
                   const SizedBox(height: 20),
 
@@ -121,6 +113,13 @@ class _VehicleRegistrationPageState extends State<VehicleRegistrationPage> {
                         // If the form is valid, show a Snackbar
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Vehicle Registered!')),
+                        );
+                        // Navigate to the next screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Navigation()), // Replace `NextScreen` with the name of your next screen widget
                         );
                       }
                     },

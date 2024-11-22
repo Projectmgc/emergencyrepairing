@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/user/screens/navigation.dart';
+import 'package:flutter_application_1/admin/screens/admin_home.dart';
 import 'package:flutter_application_1/user/screens/register.dart';
+import 'package:flutter_application_1/user/screens/second.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -14,6 +15,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Variable to manage password visibility
   bool isPasswordVisible = false;
+
+  // Admin credentials (you can change these as needed)
+  final String adminUsername = "admin";
+  final String adminPassword = "admin123";
 
   @override
   Widget build(BuildContext context) {
@@ -152,10 +157,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Navigation()),
-                        );
+                        String username = usernameController.text;
+                        String password = passwordController.text;
+
+                        // Check if the entered username and password match the admin credentials
+                        if (username == "admin@example.com" &&
+                            password == "admin123") {
+                          // Navigate to the admin page
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    AdminPage()), // Replace with your admin page widget
+                          );
+                        } else {
+                          // Proceed to normal screen if not admin
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    VehicleRegistrationPage()),
+                          );
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(

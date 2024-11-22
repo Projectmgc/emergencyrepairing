@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/user/screens/login_screen.dart';
+import 'package:flutter_application_1/user/screens/navigation.dart';
+import 'package:flutter_application_1/user/screens/second.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -83,7 +85,7 @@ class _RegisterState extends State<Register> {
 
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => VehicleRegistrationPage()),
       );
     } else {
       print('Form is not valid');
@@ -93,6 +95,8 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          Color.fromARGB(255, 168, 213, 158), // Light grey background color
       body: SingleChildScrollView(
         // Make the screen scrollable
         child: Container(
@@ -132,7 +136,7 @@ class _RegisterState extends State<Register> {
                   Text(
                     'Create an Account',
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
                       color: const Color.fromARGB(255, 0, 0, 0),
                     ),
@@ -288,6 +292,7 @@ class _RegisterState extends State<Register> {
                           ),
                           child: Text('Register'),
                         ),
+
                         SizedBox(height: 20),
                         // Add a TextButton to navigate to the login screen
                         TextButton(
@@ -295,7 +300,7 @@ class _RegisterState extends State<Register> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()),
+                                  builder: (context) => Navigation()),
                             );
                           },
                           child: Text(

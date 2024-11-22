@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(TowingServiceApp());
-}
-
 class TowingServiceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,7 +23,6 @@ class TowingServiceCategories extends StatefulWidget {
 class _TowingServiceCategoriesState extends State<TowingServiceCategories> {
   final List<String> categories = [
     'Emergency Tow',
-    'Flatbed Tow',
     'Accident Tow',
     'Motorcycle Tow',
     'Long-Distance Tow',
@@ -54,20 +49,6 @@ class _TowingServiceCategoriesState extends State<TowingServiceCategories> {
         'price': 1200.0,
         'details': 'Includes emergency towing for the first 30 km.',
         'baseDistance': 30.0,
-      },
-    ],
-    'Flatbed Tow': [
-      {
-        'name': 'Flatbed Tow Masters',
-        'price': 1500.0,
-        'details': 'Includes towing for the first 40 km.',
-        'baseDistance': 40.0,
-      },
-      {
-        'name': 'Safe Tow Services',
-        'price': 1600.0,
-        'details': 'Includes towing for the first 50 km.',
-        'baseDistance': 50.0,
       },
     ],
     'Accident Tow': [
@@ -295,8 +276,6 @@ class _TowingServiceCategoriesState extends State<TowingServiceCategories> {
     switch (category) {
       case 'Emergency Tow':
         return Icon(Icons.local_taxi, color: Colors.red, size: 50);
-      case 'Flatbed Tow':
-        return Icon(Icons.directions_car, color: Colors.blue, size: 50);
       case 'Accident Tow':
         return Icon(Icons.car_repair, color: Colors.green, size: 50);
       case 'Motorcycle Tow':

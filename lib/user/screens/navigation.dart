@@ -5,21 +5,6 @@ import 'package:flutter_application_1/user/screens/login_screen.dart';
 import 'package:flutter_application_1/user/screens/profile.dart';
 import 'package:flutter_application_1/user/screens/setting.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const Navigation(),
-    );
-  }
-}
-
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
 
@@ -60,9 +45,24 @@ class _NavigationState extends State<Navigation> {
                   235) // Sets a custom font family (you can choose your own)
               ),
         ),
-        backgroundColor:
-            const Color.fromARGB(255, 173, 167, 117), // Custom hex color
-        centerTitle: true, // This centers the title within the app bar
+
+        backgroundColor: Colors.transparent, // Makes background transparent
+        centerTitle: true,
+
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(
+                    255, 255, 174, 0), // first color (example yellow)
+
+                Color.fromARGB(255, 135, 18, 31), // second color
+              ],
+            ),
+          ),
+        ), // This centers the title within the app bar
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(

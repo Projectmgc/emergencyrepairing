@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/owner/screens/owner_home.dart';
 
 void main() {
   runApp(ServiceProviderApp());
@@ -35,7 +36,7 @@ class _ServiceProviderLoginPageState extends State<ServiceProviderLoginPage> {
       if (email == "provider@example.com" && password == "provider123") {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ServiceProviderDashboard()),
+          MaterialPageRoute(builder: (context) => ServiceHomePage()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -50,7 +51,7 @@ class _ServiceProviderLoginPageState extends State<ServiceProviderLoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Service Provider Login'),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color.fromARGB(255, 132, 167, 195),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
