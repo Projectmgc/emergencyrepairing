@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/user/screens/about.dart';
+import 'package:flutter_application_1/user/screens/history.dart';
 import 'package:flutter_application_1/user/screens/home_screen.dart';
 import 'package:flutter_application_1/user/screens/login_screen.dart';
 import 'package:flutter_application_1/user/screens/profile.dart';
@@ -113,6 +114,14 @@ class _NavigationState extends State<Navigation> {
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Settings()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.history, color: Colors.black),
+              title: const Text('History'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserHistoryPage()));
               },
             ),
             // Divider for separation
