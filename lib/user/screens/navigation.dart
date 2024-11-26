@@ -21,6 +21,8 @@ class _NavigationState extends State<Navigation> {
     HomeScreen(),
     ProfilePage(),
     const SettingsPage(),
+    UserHistoryPage(),
+    AboutHelpPage(), // Assuming AboutHelpPage exists
   ];
 
   // Function to navigate to a selected page
@@ -28,7 +30,6 @@ class _NavigationState extends State<Navigation> {
     setState(() {
       _selectedPageIndex = index;
     });
-    Navigator.pop(context); // Close the drawer after selection
   }
 
   @override
@@ -42,119 +43,54 @@ class _NavigationState extends State<Navigation> {
               fontSize: 24, // Custom font size
               letterSpacing: 1.2, // Adds space between the letters
               fontFamily: 'Roboto',
-              color: Color.fromARGB(255, 249, 239,
-                  235) // Sets a custom font family (you can choose your own)
+              color: Color.fromARGB(255, 249, 239, 235) // Custom font color
               ),
         ),
-
         backgroundColor: Colors.transparent, // Makes background transparent
         centerTitle: true,
-
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color.fromARGB(
-                    255, 255, 174, 0), // first color (example yellow)
-
+                Color.fromARGB(255, 255, 174, 0), // first color (yellow)
                 Color.fromARGB(255, 135, 18, 31), // second color
               ],
             ),
           ),
-        ), // This centers the title within the app bar
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            // Drawer Header with Avatar
-            const UserAccountsDrawerHeader(
-              accountName: Text('User Name', style: TextStyle(fontSize: 18)),
-              accountEmail: Text('user@example.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage(
-                    'assets/images/avatar.png'), // Use your image here
-              ),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 173, 167, 117),
-              ),
-            ),
-            // Drawer Menu Items
-            ListTile(
-              leading: const Icon(Icons.home, color: Colors.black),
-              title: const Text('Home'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Navigation()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.person, color: Colors.black),
-              title: const Text('Profile'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileScreen()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.settings, color: Colors.black),
-              title: const Text('Settings'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Settings()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.history, color: Colors.black),
-              title: const Text('History'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UserHistoryPage()));
-              },
-            ),
-            // Divider for separation
-            const Divider(),
-            // Help and Logout options
-            ListTile(
-              leading: const Icon(Icons.help, color: Colors.black),
-              title: const Text('About Help'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            AboutHelpPage())); // Close the drawer
-                // Add Help Screen or About Page here if needed
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.exit_to_app, color: Colors.black),
-              title: const Text('Logout'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            LoginScreen())); // Close the drawer
-                // Add logout logic here
-              },
-            ),
-          ],
-        ),
+      body: _pages[_selectedPageIndex], // Displays selected page
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedPageIndex,
+        onTap: _onSelectPage,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            label: 'History',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help),
+            label: 'About/Help',
+          ),
+        ],
+        backgroundColor: Colors.white, // Solid color for the bottom bar
+        selectedItemColor: Colors.orange, // Color for selected item
+        unselectedItemColor: Colors.grey, // Color for unselected items
       ),
-      body: _pages[_selectedPageIndex],
     );
   }
 }
@@ -179,6 +115,30 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text('Settings Page', style: TextStyle(fontSize: 24)),
+    );
+  }
+}
+
+// History Page
+class UserHistoryPage extends StatelessWidget {
+  const UserHistoryPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('History Page', style: TextStyle(fontSize: 24)),
+    );
+  }
+}
+
+// About/Help Page
+class AboutHelpPage extends StatelessWidget {
+  const AboutHelpPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('About / Help Page', style: TextStyle(fontSize: 24)),
     );
   }
 }

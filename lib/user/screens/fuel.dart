@@ -12,6 +12,7 @@ class FuelStationApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+       
       ),
       home: FuelStationList(),
     );
@@ -92,15 +93,13 @@ class _FuelStationListState extends State<FuelStationList> {
     },
   ];
 
-  int? selectedStationIndex; // Tracks the selected station
+  int? selectedStationIndex;
   String? selectedFuel;
   double quantity = 0.0;
   double totalPrice = 0.0;
 
-  // Location filter variable
   String enteredLocation = '';
 
-  // Method to filter stations based on the entered location
   List<Map<String, dynamic>> getFilteredStations() {
     if (enteredLocation.isEmpty) {
       return fuelStations;
@@ -121,87 +120,88 @@ class _FuelStationListState extends State<FuelStationList> {
   }
 
   void showConfirmDialog() {
-    // Show a confirmation dialog before proceeding to payment
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("Confirm Your Order"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Fuel: $selectedFuel', style: TextStyle(fontWeight: FontWeight.bold)),
-              Text('Quantity: $quantity liters', style: TextStyle(fontWeight: FontWeight.bold)),
-              Text('Total Price: ₹${totalPrice.toStringAsFixed(2)}', style: TextStyle(fontWeight: FontWeight.bold)),
+    if (selectedFuel != null && quantity > 0) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Confirm Your Order", style: TextStyle(fontWeight: FontWeight.bold)),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Fuel: $selectedFuel', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Quantity: $quantity liters', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Total Price: ₹${totalPrice.toStringAsFixed(2)}', style: TextStyle(fontWeight: FontWeight.bold)),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    selectedFuel = null;
+                    quantity = 0.0;
+                    totalPrice = 0.0;
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Order canceled. No payment processed.'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                },
+                child: Text('Cancel', style: TextStyle(color: Colors.red)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Payment confirmed! ₹${totalPrice.toStringAsFixed(2)} paid successfully.'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+
+                  setState(() {
+                    selectedFuel = null;
+                    quantity = 0.0;
+                    totalPrice = 0.0;
+                  });
+
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Completed!'),
+                        content: Text('Your payment has been successfully processed.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Text('Confirm'),
+              ),
             ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                // Cancel the order: Reset the state and show a cancellation message
-                Navigator.pop(context); // Close the dialog
-                setState(() {
-                  selectedFuel = null;
-                  quantity = 0.0;
-                  totalPrice = 0.0;
-                });
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Order canceled. No payment processed.'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              },
-              child: Text('Cancel', style: TextStyle(color: Colors.red)),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Proceed with payment: Handle the payment action
-                Navigator.pop(context); // Close the dialog
-
-                // Show a confirmation message after payment is processed
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                        'Payment confirmed! ₹${totalPrice.toStringAsFixed(2)} paid successfully.'),
-                    backgroundColor: Colors.green,
-                  ),
-                );
-
-                // Reset after confirmation (optional)
-                setState(() {
-                  selectedFuel = null;
-                  quantity = 0.0;
-                  totalPrice = 0.0;
-                });
-
-                // Show confirmation message as a dialog
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text('Confirmation'),
-                      content: Text(
-                          'Your payment of ₹${totalPrice.toStringAsFixed(2)} for $quantity liters of $selectedFuel has been successfully processed.'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context); // Close confirmation dialog
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              child: Text('Confirm'),
-            ),
-          ],
-        );
-      },
-    );
+          );
+        },
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Please select fuel and quantity first!'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    }
   }
 
   @override
@@ -212,7 +212,7 @@ class _FuelStationListState extends State<FuelStationList> {
       appBar: AppBar(
         title: Text(
           'Fuel Stations',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
         ),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
@@ -232,19 +232,20 @@ class _FuelStationListState extends State<FuelStationList> {
                     },
                     decoration: InputDecoration(
                       labelText: 'Enter Location (e.g., Location A)',
+                      prefixIcon: Icon(Icons.location_on, color: Colors.blueAccent),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(color: Colors.blueAccent),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(15.0),
                         borderSide: BorderSide(color: Colors.blueAccent, width: 2),
                       ),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.clear),
+                  icon: Icon(Icons.clear, color: Colors.blueAccent),
                   onPressed: () {
                     setState(() {
                       enteredLocation = '';
@@ -254,7 +255,6 @@ class _FuelStationListState extends State<FuelStationList> {
               ],
             ),
           ),
-          // Show a message if no stations are found
           if (filteredStations.isEmpty)
             Padding(
               padding: const EdgeInsets.all(20.0),
@@ -268,14 +268,13 @@ class _FuelStationListState extends State<FuelStationList> {
               itemCount: filteredStations.length,
               itemBuilder: (context, index) {
                 final station = filteredStations[index];
-                final isSelected = selectedStationIndex == index;
 
                 return Card(
-                  margin: EdgeInsets.all(10),
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  margin: EdgeInsets.all(12),
+                  elevation: 8,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -285,91 +284,77 @@ class _FuelStationListState extends State<FuelStationList> {
                             Icon(
                               Icons.local_gas_station,
                               color: Colors.orange,
-                              size: 20,
+                              size: 28,
                             ),
-                            SizedBox(width: 5),
                             Text(
                               station['name'],
                               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                            Radio<int>(  // Select the fuel station
-                              value: index,
-                              groupValue: selectedStationIndex,
-                              onChanged: (int? value) {
-                                setState(() {
-                                  selectedStationIndex = value;
-                                  selectedFuel = null;
-                                  quantity = 0.0;
-                                  totalPrice = 0.0;
-                                });
-                              },
-                            ),
                           ],
                         ),
-                        if (isSelected) ...[
-                          // Display the details for the selected station
-                          Text('Address: ${station['address']}'),
-                          Text('Contact: ${station['contactNumber']}'),
-                          SizedBox(height: 10),
-                          // Display available fuels and prices
-                          ...station['fuels'].entries.map((fuel) {
-                            final fuelName = fuel.key;
-                            final pricePerLiter = fuel.value;
-                            return Row(
-                              children: [
-                                Checkbox(
-                                  value: selectedFuel == fuelName,
-                                  onChanged: (bool? value) {
-                                    if (value != null && value) {
-                                      setState(() {
-                                        selectedFuel = fuelName;
-                                        totalPrice = 0.0;
-                                      });
-                                    }
-                                  },
-                                ),
-                                Text(
-                                  '$fuelName - ₹${pricePerLiter.toStringAsFixed(2)} per liter',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                if (selectedFuel == fuelName)
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20.0),
-                                    child: Row(
-                                      children: [
-                                        Text(' Enter the Quantity:'),
-                                        SizedBox(width: 5),
-                                        Container(
-                                          width: 80,
-                                          child: TextField(
+                        SizedBox(height: 10),
+                        Text(station['address'], style: TextStyle(fontSize: 14)),
+                        Text('Contact: ${station['contactNumber']}', style: TextStyle(fontSize: 14)),
+                        SizedBox(height: 15),
+                        Wrap(
+                          spacing: 15,
+                          children: station['fuels'].keys.map<Widget>((fuelType) {
+                            final price = station['fuels'][fuelType];
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedFuel = fuelType;
+                                });
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Select Quantity'),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text('Fuel: $fuelType'),
+                                          Text('Price per Liter: ₹${price.toStringAsFixed(2)}'),
+                                          TextField(
                                             keyboardType: TextInputType.number,
+                                            decoration: InputDecoration(labelText: 'Quantity in Liters'),
                                             onChanged: (value) {
                                               if (value.isNotEmpty) {
-                                                calculatePrice(
-                                                    selectedFuel!,
-                                                    pricePerLiter,
-                                                    double.parse(value));
+                                                final qty = double.tryParse(value);
+                                                if (qty != null && qty > 0) {
+                                                  setState(() {
+                                                    quantity = qty;
+                                                    totalPrice = qty * price!;
+                                                  });
+                                                }
                                               }
                                             },
-                                            decoration: InputDecoration(
-                                              hintText: 'Enter qty',
-                                              border: OutlineInputBorder(),
-                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                              ],
+                                          SizedBox(height: 20),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              calculatePrice(fuelType, price, quantity);
+                                              Navigator.pop(context);
+                                              showConfirmDialog();
+                                            },
+                                            child: Text('Confirm Quantity'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Chip(
+                                label: Text(
+                                  '$fuelType ₹${price.toStringAsFixed(2)}',
+                                  style: TextStyle(fontSize: 14, color: Colors.white),
+                                ),
+                                backgroundColor: Colors.blueAccent,
+                              ),
                             );
                           }).toList(),
-                          SizedBox(height: 10),
-                          if (selectedFuel != null && quantity > 0)
-                            ElevatedButton(
-                              onPressed: showConfirmDialog,
-                              child: Text('Proceed to Payment'),
-                            ),
-                        ],
+                        ),
                       ],
                     ),
                   ),
